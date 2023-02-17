@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-#requires gospider
+#requires gospider, subfider, assetfiner, nmap
 
 read -p "domain: " domain
 url="https://$domain"
@@ -18,7 +18,7 @@ done<ip.txt
 printf "Getting subdomains"
 subfinder -d $domain > temp.txt
 assetfinder -subs-only $domain >> temp.txt
-sort subs.txt | uniq > subs.txt
+sort temp.txt | uniq > subs.txt
 rm temp.txt 
 #gobuster dns -d $domain -w /usr/share/wordlists/amass/subdomains-top1mil-5000.txt > subdomains.txt
 printf "Spidering"
